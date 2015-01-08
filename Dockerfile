@@ -1,13 +1,17 @@
 FROM fedora
 MAINTAINER https://github.com/wkicior
 RUN yum update -y
-RUN yum install -y scala sbt
-RUN mkdir /forecast-engine
-ADD src /forecast-engine/src
-ADD built.sbt /forecast-engine/
+RUN yum -y  install maven
+# Download and install TomEE
 
-EXPOSE 80
-WORKDIR /forecast-engine
+# Build our apps from source code
+RUN mkdir -p /opt/forecast-engine
+ADD pom.xml /opt/forecast-engine/
+ADD src /opt/forecast-engine/src
+RUN cd /opt/forecast-engine && mvn clean install tomee:build
 
-CMD sbt run
+EXPOSE 8080
+WORKDIR /opt/forecast-engine
+
+CMD mvn tomee:start && tail -f target/apache-tomee/logs/catalina*log
 
