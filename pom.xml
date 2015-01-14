@@ -7,6 +7,18 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<name>forecast-engine</name>
 	<url>http://maven.apache.org</url>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>https://maven.java.net/content/groups/promoted/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/glassfish/</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
@@ -19,15 +31,47 @@
 				</configuration>
 			</plugin>
 			<plugin>
-		      <groupId>org.apache.openejb.maven</groupId>
-		      <artifactId>tomee-maven-plugin</artifactId>
-		      <version>1.7.1</version>
-		      <configuration>
-		        <tomeeVersion>1.7.1</tomeeVersion>
-		        <tomeeClassifier>plus</tomeeClassifier>
-		        
-		      </configuration>
-		    </plugin>
+				<groupId>org.apache.openejb.maven</groupId>
+				<artifactId>tomee-maven-plugin</artifactId>
+				<version>1.7.1</version>
+				<configuration>
+					<tomeeVersion>1.7.1</tomeeVersion>
+					<tomeeClassifier>plus</tomeeClassifier>
+
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.glassfish.embedded</groupId>
+				<artifactId>maven-embedded-glassfish-plugin</artifactId>
+				<version>4.0</version>
+				<configuration>
+					<goalPrefix>embedded-glassfish</goalPrefix>
+					<autoDelete>true</autoDelete>
+					<port>8020</port>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<configuration>
+							<app>target/${project.build.finalName}.war</app>
+							<contextRoot>/app</contextRoot>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.glassfish.main.extras</groupId>
+						<artifactId>glassfish-embedded-all</artifactId>
+						<version>4.0</version>
+					</dependency>
+
+				</dependencies>
+			</plugin>
+
+			
 		</plugins>
 	</build>
 	<dependencies>
@@ -35,14 +79,26 @@
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
-			</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.14</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
-	
-		
+
+
 </project>
