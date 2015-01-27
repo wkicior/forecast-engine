@@ -4,6 +4,7 @@
 $ docker build -t wkicior/forecast-engine .
 
 #RUN:
+$ docker run --privileged=true -i -t -p 8091:8020 -v [path_to]/.m2:/root/.m2 wkicior/forecast-engine
 $ docker run -d -p 8000:80 wkicior/forecast-engine
 
 
