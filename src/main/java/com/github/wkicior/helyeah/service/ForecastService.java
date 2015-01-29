@@ -12,7 +12,7 @@ import com.github.wkicior.helyeah.application.TargetURI;
 public class ForecastService {
 	
 	@Inject
-    @TargetURI("http://localhost:8090/forecast/12/13")
+    @TargetURI("http://wwo-proxy/forecast/{latitude}/{longitude}")
     WebTarget wwoProxy;
 
 	/**
@@ -20,12 +20,10 @@ public class ForecastService {
 	 * @param latitude
 	 * @param longitude
 	 */
-	public void processLocation(double latitude, double longitude) {
-	/*	String path = wwoProxy.getUri().getPath()
-				.replace("{latitude}",	Double.toString(latitude))
-				.replace("{longitude}", Double.toString(longitude));*/
-		//wwoProxy.path(path);
-		JsonObject resp = wwoProxy.request(MediaType.APPLICATION_JSON).get(JsonObject.class);
+	public void processLocation(double latitude, double longitude) {		
+		WebTarget resolvedWwoProxy = wwoProxy.resolveTemplate("latitude", Double.toString(latitude)).
+				resolveTemplate("longitude", Double.toString(longitude));
+		JsonObject resp = resolvedWwoProxy.request(MediaType.APPLICATION_JSON).get(JsonObject.class);
 		System.out.println(resp.toString());
 		
 	}
