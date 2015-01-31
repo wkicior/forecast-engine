@@ -1,5 +1,8 @@
 package com.github.wkicior.helyeah.boundary;
 
+import junit.framework.TestCase;
+import model.Coordinates;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -9,25 +12,24 @@ import org.mockito.MockitoAnnotations;
 
 import com.github.wkicior.helyeah.service.ForecastService;
 
-import junit.framework.TestCase;
-
 public class ForecastEngineRSTest extends TestCase {
-	
+
 	@Mock
 	ForecastService forecastService;
-	
+
 	@InjectMocks
 	ForecastEngineRS forecastEngineRS;
-	
+
+	@Override
 	@Before
 	public void setUp() {
-		MockitoAnnotations.initMocks(this);		
+		MockitoAnnotations.initMocks(this);
 	}
-	
+
 	@Test
 	public void test_processLocation() {
 		forecastEngineRS.processLocation(1, 2);
-		Mockito.verify(forecastService).processLocation(1, 2);
+		Mockito.verify(forecastService).processLocation(new Coordinates(1, 2));
 	}
 
 }
