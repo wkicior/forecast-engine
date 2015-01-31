@@ -1,5 +1,8 @@
 package com.github.wkicior.helyeah.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonObject;
@@ -21,8 +24,10 @@ public class ForecastService {
 	 * @param longitude
 	 */
 	public void processLocation(double latitude, double longitude) {		
-		WebTarget resolvedWwoProxy = wwoProxy.resolveTemplate("latitude", Double.toString(latitude)).
-				resolveTemplate("longitude", Double.toString(longitude));
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("latitude", Double.toString(latitude));
+		params.put("longitude", Double.toString(longitude));
+		WebTarget resolvedWwoProxy = wwoProxy.resolveTemplates(params);
 		JsonObject resp = resolvedWwoProxy.request(MediaType.APPLICATION_JSON).get(JsonObject.class);
 		System.out.println(resp.toString());
 		
