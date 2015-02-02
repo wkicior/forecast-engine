@@ -6,8 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import model.Coordinates;
-
+import com.github.wkicior.helyeah.model.Coordinates;
 import com.github.wkicior.helyeah.service.ForecastService;
 
 @Path("/forecast-engine")

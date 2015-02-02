@@ -1,7 +1,6 @@
 package com.github.wkicior.helyeah.boundary;
 
 import junit.framework.TestCase;
-import model.Coordinates;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.github.wkicior.helyeah.model.Coordinates;
 import com.github.wkicior.helyeah.service.ForecastService;
 
 public class ForecastEngineRSTest extends TestCase {

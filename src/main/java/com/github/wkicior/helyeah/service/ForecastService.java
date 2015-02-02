@@ -9,9 +9,8 @@ import javax.json.JsonObject;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
-import model.Coordinates;
-
 import com.github.wkicior.helyeah.application.TargetURI;
+import com.github.wkicior.helyeah.model.Coordinates;
 
 @Stateless
 public class ForecastService {

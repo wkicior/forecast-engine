@@ -6,7 +6,7 @@ import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.TimerService;
 
-import model.Coordinates;
+import com.github.wkicior.helyeah.model.Coordinates;
 
 @Singleton
 public class ForecastTimer {
