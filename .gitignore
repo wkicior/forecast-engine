@@ -23,3 +23,6 @@ project/plugins/project/
 #Editor
 *~
 
+.idea
+*.iml
+
