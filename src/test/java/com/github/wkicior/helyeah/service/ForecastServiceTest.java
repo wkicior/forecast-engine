@@ -1,10 +1,13 @@
 package com.github.wkicior.helyeah.service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
@@ -17,8 +20,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.github.wkicior.helyeah.model.Coordinates;
+
 public class ForecastServiceTest {
-	
+
 	@Mock
 	WebTarget wwoProxy;
 	
@@ -28,10 +33,10 @@ public class ForecastServiceTest {
 	
 	@InjectMocks
 	ForecastService service;
-	
+
 	@Before
 	public void setUp() {
-		MockitoAnnotations.initMocks(this);	
+	    MockitoAnnotations.initMocks(this);	
 	}
 
 	@Test
@@ -48,8 +53,7 @@ public class ForecastServiceTest {
 		Mockito.when(resolvedWwoProxy.request(MediaType.APPLICATION_JSON)).thenReturn(builderWwoProxy);
 		Mockito.when(notificationService.request(MediaType.APPLICATION_JSON)).thenReturn(builderNotificationService);
 		
-		service.processLocation(12.0, 13.5);
+		service.processLocation(new Coordinates(12.0, 13.5));
 		Mockito.verify(builderNotificationService).post(Mockito.any(Entity.class));
 	}
-
 }
