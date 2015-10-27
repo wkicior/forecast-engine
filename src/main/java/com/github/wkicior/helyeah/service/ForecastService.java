@@ -21,7 +21,7 @@ public class ForecastService {
 	WebTarget wwoProxy;
 	
 	@Inject
-	@TargetURI("http://notifications/notifications")
+	@TargetURI("http://notifications-service/notifications")
 	WebTarget notificationService;
 
 
