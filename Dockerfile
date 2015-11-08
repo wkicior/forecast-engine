@@ -23,7 +23,6 @@ ADD change_admin_password_func.sh /usr/local/glassfish4/bin/
 RUN chmod +x /usr/local/glassfish4/bin/change_admin_password_func.sh
 RUN /usr/local/glassfish4/bin/asadmin start-domain  
 RUN /usr/local/glassfish4/bin/change_admin_password_func.sh admin123
-RUN cd /opt/forecast-engine; /opt/apache-maven-3.0.5/bin/mvn package glassfish:deploy 
-CMD /opt/apache-maven-3.0.5/bin/mvn -fn glassfish:undeploy &&  /opt/apache-maven-3.0.5/bin/mvn package glassfish:deploy && tail -f /usr/local/glassfish4/glassfish/domains/domain1/logs/server.log
+CMD /opt/apache-maven-3.0.5/bin/mvn -fn glassfish:undeploy &&  /opt/apache-maven-3.0.5/bin/mvn clean package glassfish:deploy && tail -f /usr/local/glassfish4/glassfish/domains/domain1/logs/server.log
 
 

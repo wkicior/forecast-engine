@@ -22,6 +22,10 @@ public class ForecastTimer {
 
 	@Schedule(minute = "*/3", hour = "*")
 	public void onTimeout() {
+	    try {
 		forecastService.processLocation(CHALUPY_COORDINATES);
+	    } catch (Exception e) {
+		System.out.println(e);
+	    }
 	}
 }
