@@ -20,11 +20,11 @@ public class Connector {
     @PostConstruct
     public void init() {
         this.client = ClientBuilder.newClient();
-        this.client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
-        this.client.property(ClientProperties.READ_TIMEOUT, 1000);
+        this.client.property(ClientProperties.CONNECT_TIMEOUT, 10000);
+        this.client.property(ClientProperties.READ_TIMEOUT, 10000);
         //without runtime dependency:
-        this.client.property("jersey.config.client.connectTimeout", 1000);
-        this.client.property("jersey.config.client.readTimeout", 1000);
+        this.client.property("jersey.config.client.connectTimeout", 10000);
+        this.client.property("jersey.config.client.readTimeout", 10000);
     }
 
     @Produces

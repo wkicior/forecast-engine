@@ -37,7 +37,7 @@ public class ForecastService {
 		params.put("longitude", Double.toString(coordinates.getLongitude()));
 		WebTarget resolvedWwoProxy = wwoProxy.resolveTemplates(params);
 		JsonObject resp = resolvedWwoProxy.request(MediaType.APPLICATION_JSON).get(JsonObject.class);
-				System.out.println("processLocation: " + resp.toString());
+		System.out.println("processLocation: " + resp.toString());
 		notificationService.request(MediaType.APPLICATION_JSON).post(Entity.json(resp));
 		System.out.println("processLocation: OK");
 	}
